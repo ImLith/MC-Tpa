@@ -6,7 +6,18 @@ api-version: 1.20
 
 description: A MineCraft plugin for TPA
 author: Lith
-website: https://github.com/ImLith/tpa
+website: https://github.com/ImLith/MC-Tpa
 
 depend: []
 softdepend: []
+
+commands:
+  tpa:
+    description: Request teleport to another player.
+    usage: /<command> <player>
+    permission: tpa.tpa
+
+permissions:
+  tpa.tpa:
+    description: Use the /tpa command
+    default: op
