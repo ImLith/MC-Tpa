@@ -3,3 +3,9 @@ messages:
   no_tpa_self: "Can't teleport to yourself!"
   player_not_found: "Player %player% not found!"
   player_not_online: "Player %player% is not online!"
+  request_sent: "TPA request sent to %player%"
+  accept_tpa: "%accept% TPA request from %player%"
+
+accept_btn:
+  text: "[Accept]"
+  hover_text: "Click to accept TPA from %player%"

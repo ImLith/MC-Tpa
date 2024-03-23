@@ -32,7 +32,7 @@
     <dependency>
       <groupId>com.lith.redis</groupId>
       <artifactId>redis</artifactId>
-      <version>0.0.1</version>
+      <version>0.0.2</version>
       <scope>provided</scope>
     </dependency>
 

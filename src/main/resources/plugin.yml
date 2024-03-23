@@ -8,7 +8,7 @@ description: A MineCraft plugin for TPA
 author: Lith
 website: https://github.com/ImLith/MC-Tpa
 
-depend: [LithCore]
+depend: [LithCore, Redis]
 softdepend: []
 
 commands:
