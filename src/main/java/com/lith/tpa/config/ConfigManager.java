@@ -39,7 +39,32 @@ public class ConfigManager extends PluginConfigManager {
                 }
 
                 private String get(String prefix, String key) {
-                        return ChatColor.translateAlternateColorCodes('&', config.getString(prefix + "." + key));
+                        return ChatColor.translateAlternateColorCodes('&',
+                                        unescapeJava(config.getString(prefix + "." + key)));
+                }
+
+                private String unescapeJava(String input) {
+                        StringBuilder builder = new StringBuilder();
+                        int i = 0;
+
+                        while (i < input.length()) {
+                                char currentChar = input.charAt(i);
+                                if (currentChar == '\\' && i + 1 < input.length() && input.charAt(i + 1) == 'u') {
+                                        try {
+                                                builder.append((char) Integer
+                                                                .parseInt(input.substring(i + 2, i + 6), 16));
+                                                i += 6;
+                                        } catch (NumberFormatException e) {
+                                                builder.append(currentChar);
+                                                i++;
+                                        }
+                                } else {
+                                        builder.append(currentChar);
+                                        i++;
+                                }
+                        }
+
+                        return builder.toString();
                 }
         }
 }
