@@ -5,6 +5,12 @@ messages:
   player_not_online: "Player %player% is not online!"
   request_sent: "TPA request sent to %player%"
   accept_tpa: "%accept% TPA request from %player%"
+  request_expired: "TPA request ahs expired"
+  tpaccept_usage: "Usage: /tpaccept <player>"
+  accepted_request: "%player% accepted your request for teleportation"
+  on_teleport: "Teleported %player% to you"
+  failed_teleport: "Failed to teleport %player% to you!"
+  failed_teleportation: "Failed to teleport you to %player%"
 
 accept_btn:
   text: "[Accept]"

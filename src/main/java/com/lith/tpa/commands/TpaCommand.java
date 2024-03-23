@@ -53,7 +53,7 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
         String[] parts = messages.acceptTpa.replace(Static.MessageKey.player, sender.getName())
                 .split(Static.MessageKey.accept_btn);
 
-        TpaStore.storeRequest(player.getUniqueId(), targetPlayer.getUniqueId(), 120L);
+        TpaStore.storeRequest(player.getUniqueId(), targetPlayer.getUniqueId());
         player.sendMessage(messages.requestSent.replace(Static.MessageKey.player, targetName));
         targetPlayer.sendMessage(join(
                 text(parts[0]),

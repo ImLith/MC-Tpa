@@ -23,6 +23,12 @@ public class ConfigManager extends PluginConfigManager {
                 public final String acceptTpa = getCommand(ConfigKeys.Messages.ACCEPT_TPA);
                 public final String acceptBtnHoverText = getAcceptBtn(ConfigKeys.AcceptBtn.HOVER_TEXT);
                 public final String acceptBtnText = getAcceptBtn(ConfigKeys.AcceptBtn.TEXT);
+                public final String requestExpired = getCommand(ConfigKeys.Messages.REQUEST_EXPIRED);
+                public final String tpacceptUsage = getCommand(ConfigKeys.Messages.TPACCEPT_USAGE);
+                public final String acceptedRequest = getCommand(ConfigKeys.Messages.ACCEPTED_REQUEST);
+                public final String onTeleport = getCommand(ConfigKeys.Messages.ON_TELEPORT);
+                public final String failedTeleport = getCommand(ConfigKeys.Messages.FAILED_TELEPORT);
+                public final String failedTeleportation = getCommand(ConfigKeys.Messages.FAILED_TELEPORATION);
 
                 private String getCommand(String key) {
                         return get(ConfigKeys.Messages.SECTION, key);

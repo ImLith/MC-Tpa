@@ -17,6 +17,11 @@ commands:
     usage: /<command> <player>
     permission: tpa.tpa
 
+  tpaccept:
+    description: Accept player teleportation request
+    usage: /<command> <player>
+    permission: tpa.tpa
+
 permissions:
   tpa.tpa:
     description: Use the /tpa command

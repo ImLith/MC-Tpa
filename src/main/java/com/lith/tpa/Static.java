@@ -15,6 +15,12 @@ public class Static {
             public static final String PLAYER_NOT_ONLINE = "player_not_online";
             public static final String REQUEST_SENT = "request_sent";
             public static final String ACCEPT_TPA = "accept_tpa";
+            public static final String REQUEST_EXPIRED = "request_expired";
+            public static final String TPACCEPT_USAGE = "tpaccept_usage";
+            public static final String ACCEPTED_REQUEST = "accepted_request";
+            public static final String ON_TELEPORT = "on_teleport";
+            public static final String FAILED_TELEPORT = "failed_teleport";
+            public static final String FAILED_TELEPORATION = "failed_teleportation";
         }
 
         public static final class AcceptBtn {
