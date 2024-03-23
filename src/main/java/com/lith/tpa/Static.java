@@ -36,22 +36,6 @@ public class Static {
         }
     }
 
-    final public static class Default {
-        final public static class Command {
-            public static final String TPA_USAGE = "Usage: /tpa <player>";
-            public static final String NO_TPA_SELF = "Can't teleport to yourself!";
-            public static final String PLAYER_NOT_FOUND = "Player %player% not found!";
-            public static final String PLAYER_NOT_ONLINE = "Player %player% is not online!";
-            public static final String REQUEST_SENT = "TPA request sent to %player%!";
-            public static final String ACCEPT_TPA = "%accept% TPA request from %player%";
-        }
-
-        public static final class AcceptBtn {
-            public static final String TEXT = "[Accept]";
-            public static final String HOVER_TEXT = "Click to accept TPA from %player%";
-        }
-    }
-
     final public static class MessageKey {
         public static final String player = "%player%";
         public static final String accept_btn = "%accept%";
