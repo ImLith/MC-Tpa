@@ -56,7 +56,7 @@ final public class TpacceptCommand extends AbstractCommand<Plugin> {
         String targetName = target.getName();
 
         target.sendMessage(messages.acceptedRequest.replace(Static.MessageKey.player, playerName));
-        Boolean teleported = player.teleport(target.getLocation());
+        Boolean teleported = target.teleport(player.getLocation());
 
         if (teleported) {
             sender.sendMessage(messages.onTeleport.replace(Static.MessageKey.player, targetName));

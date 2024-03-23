@@ -29,40 +29,40 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
     @SuppressWarnings("deprecation")
     @Override
     public boolean onExecute(CommandSender sender, Command command, String label, String[] args) {
-        String playerName = args[0];
         Player player = (Player) sender;
 
-        if (sender.getName().equalsIgnoreCase(playerName)) {
+        if (sender.getName().equalsIgnoreCase(args[0])) {
             sender.sendMessage(messages.noTpaSelf);
             return true;
         }
 
-        Player targetPlayer = Bukkit.getPlayer(playerName);
+        Player target = Bukkit.getPlayer(args[0]);
 
-        if (targetPlayer == null) {
-            sender.sendMessage(messages.playerNotFound.replace(Static.MessageKey.player, playerName));
+        if (target == null) {
+            sender.sendMessage(messages.playerNotFound.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
-        if (!targetPlayer.isOnline()) {
-            sender.sendMessage(messages.playerNotOnline.replace(Static.MessageKey.player, playerName));
+        if (!target.isOnline()) {
+            sender.sendMessage(messages.playerNotOnline.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
-        String targetName = targetPlayer.getName();
-        String[] parts = messages.acceptTpa.replace(Static.MessageKey.player, sender.getName())
+        String playerName = player.getName();
+        String targetName = target.getName();
+        String[] parts = messages.acceptTpa.replace(Static.MessageKey.player, playerName)
                 .split(Static.MessageKey.accept_btn);
 
-        TpaStore.storeRequest(player.getUniqueId(), targetPlayer.getUniqueId());
+        TpaStore.storeRequest(player.getUniqueId(), target.getUniqueId());
         player.sendMessage(messages.requestSent.replace(Static.MessageKey.player, targetName));
-        targetPlayer.sendMessage(join(
+        target.sendMessage(join(
                 text(parts[0]),
                 text(messages.acceptBtnText)
                         .hoverEvent(showText(text(messages.acceptBtnHoverText
                                 .replace(Static.MessageKey.player, targetName))))
-                        .clickEvent(runCommand("/" + Static.Command.Names.TPACCEPT + " " + targetName)),
+                        .clickEvent(runCommand("/" + Static.Command.Names.TPACCEPT + " " + playerName)),
                 text(parts[1])));
-        targetPlayer.playSound(targetPlayer.getLocation(), ENTITY_ARROW_HIT_PLAYER, MASTER, 1.0f, 1.0f);
+        target.playSound(target.getLocation(), ENTITY_ARROW_HIT_PLAYER, MASTER, 1.0f, 1.0f);
 
         return true;
     }
