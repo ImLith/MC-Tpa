@@ -63,7 +63,7 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
                         .hoverEvent(showText(
                                 text(messages.acceptBtnHoverText.replace(Static.MessageKey.player, targetName))))
                         .clickEvent(runCommand("/" + Static.Command.Names.TPACCEPT + " " + playerName)),
-                text(parts.length > 0 ? parts[1] : "")));
+                text(parts.length > 1 ? parts[1] : "")));
         target.playSound(target.getLocation(), ENTITY_ARROW_HIT_PLAYER, MASTER, 1.0f, 1.0f);
 
         return true;
