@@ -1,0 +1,5 @@
+messages:
+  tpa_usage: "Usage: /tpa <player>"
+  no_tpa_self: "Can't teleport to yourself!"
+  player_not_found: "Player %player% not found!"
+  player_not_online: "Player %player% is not online!"

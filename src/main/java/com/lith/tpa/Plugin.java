@@ -1,9 +1,18 @@
 package com.lith.tpa;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import com.lith.lithcore.abstractClasses.MainPlugin;
+import com.lith.tpa.commands.TpaCommand;
+import com.lith.tpa.config.ConfigManager;
 
-public class Plugin extends JavaPlugin {
+public class Plugin extends MainPlugin<ConfigManager> {
+  public static Plugin plugin;
+
   public void onEnable() {
+    Plugin.plugin = this;
+
+    new ConfigManager(this);
+    new TpaCommand();
+
     Static.log.info("Plugin enabled");
   }
 

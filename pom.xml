@@ -27,6 +27,22 @@
       <version>1.20.4-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- Redis -->
+    <dependency>
+      <groupId>com.lith.redis</groupId>
+      <artifactId>redis</artifactId>
+      <version>0.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Core -->
+    <dependency>
+      <groupId>com.lith.lithcore</groupId>
+      <artifactId>lithcore</artifactId>
+      <version>0.0.6</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>${project.name}</finalName>
