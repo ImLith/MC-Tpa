@@ -17,6 +17,7 @@ import static net.kyori.adventure.text.event.HoverEvent.showText;
 import static net.kyori.adventure.text.event.ClickEvent.runCommand;
 import static org.bukkit.SoundCategory.MASTER;
 import static org.bukkit.Sound.ENTITY_ARROW_HIT_PLAYER;
+import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
 
 final public class TpaCommand extends AbstractCommand<Plugin> {
     protected final String permission = Static.Command.PermissionKeys.TPA;
@@ -26,7 +27,6 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
         Plugin.plugin.getCommand(Static.Command.Names.TPA).setExecutor(this);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean onExecute(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
@@ -48,20 +48,22 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
             return true;
         }
 
+        TpaStore.storeRequest(player.getUniqueId(), target.getUniqueId());
+
         String playerName = player.getName();
         String targetName = target.getName();
         String[] parts = messages.acceptTpa.replace(Static.MessageKey.player, playerName)
                 .split(Static.MessageKey.accept_btn);
 
-        TpaStore.storeRequest(player.getUniqueId(), target.getUniqueId());
         player.sendMessage(messages.requestSent.replace(Static.MessageKey.player, targetName));
         target.sendMessage(join(
+                noSeparators(),
                 text(parts[0]),
                 text(messages.acceptBtnText)
-                        .hoverEvent(showText(text(messages.acceptBtnHoverText
-                                .replace(Static.MessageKey.player, targetName))))
+                        .hoverEvent(showText(
+                                text(messages.acceptBtnHoverText.replace(Static.MessageKey.player, targetName))))
                         .clickEvent(runCommand("/" + Static.Command.Names.TPACCEPT + " " + playerName)),
-                text(parts[1])));
+                text(parts.length > 0 ? parts[1] : "")));
         target.playSound(target.getLocation(), ENTITY_ARROW_HIT_PLAYER, MASTER, 1.0f, 1.0f);
 
         return true;
