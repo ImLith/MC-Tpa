@@ -14,29 +14,41 @@ public class ConfigManager extends PluginConfigManager {
         }
 
         public class ConfigMessages {
-                public final String tpaUsage = config.getString(
-                                Static.ConfigKeys.Messages.SECTION + "." + Static.ConfigKeys.Messages.TPA_USAGE,
+                public final String tpaUsage = getCommand(
+                                Static.ConfigKeys.Messages.TPA_USAGE,
                                 Static.Default.Command.TPA_USAGE);
-                public final String noTpaSelf = config.getString(
-                                Static.ConfigKeys.Messages.SECTION + "." + Static.ConfigKeys.Messages.NO_TPA_SELF,
+                public final String noTpaSelf = getCommand(
+                                Static.ConfigKeys.Messages.NO_TPA_SELF,
                                 Static.Default.Command.NO_TPA_SELF);
-                public final String playerNotFound = config.getString(
-                                Static.ConfigKeys.Messages.SECTION + "." + Static.ConfigKeys.Messages.PLAYER_NOT_FOUND,
+                public final String playerNotFound = getCommand(
+                                Static.ConfigKeys.Messages.PLAYER_NOT_FOUND,
                                 Static.Default.Command.PLAYER_NOT_FOUND);
-                public final String playerNotOnline = config.getString(
-                                Static.ConfigKeys.Messages.SECTION + "." + Static.ConfigKeys.Messages.PLAYER_NOT_ONLINE,
+                public final String playerNotOnline = getCommand(
+                                Static.ConfigKeys.Messages.PLAYER_NOT_ONLINE,
                                 Static.Default.Command.PLAYER_NOT_ONLINE);
-                public final String requestSent = config.getString(
-                                Static.ConfigKeys.Messages.SECTION + "." + Static.ConfigKeys.Messages.REQUEST_SENT,
+                public final String requestSent = getCommand(
+                                Static.ConfigKeys.Messages.REQUEST_SENT,
                                 Static.Default.Command.REQUEST_SENT);
-                public final String acceptTpa = config.getString(
-                                Static.ConfigKeys.Messages.SECTION + "." + Static.ConfigKeys.Messages.ACCEPT_TPA,
+                public final String acceptTpa = getCommand(
+                                Static.ConfigKeys.Messages.ACCEPT_TPA,
                                 Static.Default.Command.ACCEPT_TPA);
-                public final String acceptBtnHoverText = config.getString(
-                                Static.ConfigKeys.AcceptBtn.SECTION + "." + Static.ConfigKeys.AcceptBtn.HOVER_TEXT,
+                public final String acceptBtnHoverText = getAcceptBtn(
+                                Static.ConfigKeys.AcceptBtn.HOVER_TEXT,
                                 Static.Default.AcceptBtn.HOVER_TEXT);
-                public final String acceptBtnText = config.getString(
-                                Static.ConfigKeys.AcceptBtn.SECTION + "." + Static.ConfigKeys.AcceptBtn.TEXT,
+                public final String acceptBtnText = getAcceptBtn(
+                                Static.ConfigKeys.AcceptBtn.TEXT,
                                 Static.Default.AcceptBtn.TEXT);
+
+                private String getCommand(String key, String defaultValue) {
+                        return get(Static.ConfigKeys.Messages.SECTION, key, defaultValue);
+                }
+
+                private String getAcceptBtn(String key, String defaultValue) {
+                        return get(Static.ConfigKeys.AcceptBtn.SECTION, key, defaultValue);
+                }
+
+                private String get(String prefix, String key, String defaultValue) {
+                        return config.getString(prefix + "." + key, defaultValue);
+                }
         }
 }
