@@ -3,6 +3,7 @@ package com.lith.tpa.config;
 import com.lith.lithcore.abstractClasses.MainPlugin;
 import com.lith.lithcore.abstractClasses.PluginConfigManager;
 import com.lith.tpa.Static;
+import net.md_5.bungee.api.ChatColor;
 
 public class ConfigManager extends PluginConfigManager {
         public static ConfigMessages messages;
@@ -48,7 +49,8 @@ public class ConfigManager extends PluginConfigManager {
                 }
 
                 private String get(String prefix, String key, String defaultValue) {
-                        return config.getString(prefix + "." + key, defaultValue);
+                        return ChatColor.translateAlternateColorCodes('&',
+                                        config.getString(prefix + "." + key, defaultValue));
                 }
         }
 }
