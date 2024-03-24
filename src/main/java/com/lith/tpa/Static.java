@@ -47,12 +47,6 @@ public class Static {
                 public static final String TPFROM = setKey("tpfrom");
             }
         }
-
-        public static final class AcceptBtn {
-            public static final String SECTION = "accept_btn";
-            public static final String TEXT = "text";
-            public static final String HOVER_TEXT = "hover_text";
-        }
     }
 
     final public static class Command {
