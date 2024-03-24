@@ -3,68 +3,66 @@ package com.lith.tpa.config;
 import com.lith.lithcore.abstractClasses.MainPlugin;
 import com.lith.lithcore.abstractClasses.PluginConfigManager;
 import com.lith.tpa.Static.ConfigKeys;
-import net.md_5.bungee.api.ChatColor;
 
 public class ConfigManager extends PluginConfigManager {
-        public static ConfigMessages messages;
+    public static ConfigMessages messages;
 
-        public ConfigManager(final MainPlugin<ConfigManager> plugin) {
-                super(plugin);
+    public ConfigManager(final MainPlugin<ConfigManager> plugin) {
+        super(plugin);
 
-                messages = new ConfigMessages();
+        messages = new ConfigMessages();
+    }
+
+    public final class ConfigMessages {
+        public Tpa tpa = new Tpa();
+        public Tpaccept tpaccept = new Tpaccept();
+        public Tpdeny tpdeny = new Tpdeny();
+        public Errors errors = new Errors();
+
+        public class Tpa {
+            public Buttons buttons = new Buttons();
+
+            public final String usage = getMessage(ConfigKeys.Messages.Tpa.USAGE);
+            public final String sent = getMessage(ConfigKeys.Messages.Tpa.SENT);
+            public final String recieved = getMessage(ConfigKeys.Messages.Tpa.RECIEVED);
+
+            public class Buttons {
+                public Accept accept = new Accept();
+                public Deny deny = new Deny();
+
+                public class Accept {
+                    public final String text = getMessage(
+                            ConfigKeys.Messages.Tpa.Buttons.Accept.TEXT);
+                    public final String hover = getMessage(
+                            ConfigKeys.Messages.Tpa.Buttons.Accept.HOVER);
+                }
+
+                public class Deny {
+                    public final String text = getMessage(
+                            ConfigKeys.Messages.Tpa.Buttons.Deny.TEXT);
+                    public final String hover = getMessage(
+                            ConfigKeys.Messages.Tpa.Buttons.Deny.HOVER);
+                }
+            }
         }
 
-        public class ConfigMessages {
-                public final String tpaUsage = getCommand(ConfigKeys.Messages.TPA_USAGE);
-                public final String noTpaSelf = getCommand(ConfigKeys.Messages.NO_TPA_SELF);
-                public final String playerNotFound = getCommand(ConfigKeys.Messages.PLAYER_NOT_FOUND);
-                public final String playerNotOnline = getCommand(ConfigKeys.Messages.PLAYER_NOT_ONLINE);
-                public final String requestSent = getCommand(ConfigKeys.Messages.REQUEST_SENT);
-                public final String acceptTpa = getCommand(ConfigKeys.Messages.ACCEPT_TPA);
-                public final String acceptBtnHoverText = getAcceptBtn(ConfigKeys.AcceptBtn.HOVER_TEXT);
-                public final String acceptBtnText = getAcceptBtn(ConfigKeys.AcceptBtn.TEXT);
-                public final String requestExpired = getCommand(ConfigKeys.Messages.REQUEST_EXPIRED);
-                public final String tpacceptUsage = getCommand(ConfigKeys.Messages.TPACCEPT_USAGE);
-                public final String acceptedRequest = getCommand(ConfigKeys.Messages.ACCEPTED_REQUEST);
-                public final String onTeleport = getCommand(ConfigKeys.Messages.ON_TELEPORT);
-                public final String failedTeleport = getCommand(ConfigKeys.Messages.FAILED_TELEPORT);
-                public final String failedTeleportation = getCommand(ConfigKeys.Messages.FAILED_TELEPORATION);
-
-                private String getCommand(String key) {
-                        return get(ConfigKeys.Messages.SECTION, key);
-                }
-
-                private String getAcceptBtn(String key) {
-                        return get(ConfigKeys.AcceptBtn.SECTION, key);
-                }
-
-                private String get(String prefix, String key) {
-                        return ChatColor.translateAlternateColorCodes('&',
-                                        unescapeJava(config.getString(prefix + "." + key)));
-                }
-
-                private String unescapeJava(String input) {
-                        StringBuilder builder = new StringBuilder();
-                        int i = 0;
-
-                        while (i < input.length()) {
-                                char currentChar = input.charAt(i);
-                                if (currentChar == '\\' && i + 1 < input.length() && input.charAt(i + 1) == 'u') {
-                                        try {
-                                                builder.append((char) Integer
-                                                                .parseInt(input.substring(i + 2, i + 6), 16));
-                                                i += 6;
-                                        } catch (NumberFormatException e) {
-                                                builder.append(currentChar);
-                                                i++;
-                                        }
-                                } else {
-                                        builder.append(currentChar);
-                                        i++;
-                                }
-                        }
-
-                        return builder.toString();
-                }
+        public class Tpaccept {
+            public final String usage = getMessage(ConfigKeys.Messages.Tpaccept.USAGE);
+            public final String accepted = getMessage(ConfigKeys.Messages.Tpaccept.ACCEPTED);
+            public final String teleported = getMessage(ConfigKeys.Messages.Tpaccept.TELEPORTED);
         }
+
+        public class Tpdeny {
+            public final String usage = getMessage(ConfigKeys.Messages.Tpdeny.USAGE);
+        }
+
+        public class Errors {
+            public final String self = getMessage(ConfigKeys.Messages.Errors.SELF);
+            public final String offline = getMessage(ConfigKeys.Messages.Errors.OFFLINE);
+            public final String notfound = getMessage(ConfigKeys.Messages.Errors.NOTFOUND);
+            public final String expired = getMessage(ConfigKeys.Messages.Errors.EXPIRED);
+            public final String tpto = getMessage(ConfigKeys.Messages.Errors.TPTO);
+            public final String tpfrom = getMessage(ConfigKeys.Messages.Errors.TPFROM);
+        }
+    }
 }
