@@ -32,19 +32,19 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
         Player player = (Player) sender;
 
         if (sender.getName().equalsIgnoreCase(args[0])) {
-            sender.sendMessage(messages.noTpaSelf);
+            sender.sendMessage(messages.errors.self);
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage(messages.playerNotFound.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(messages.errors.notfound.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
         if (!target.isOnline()) {
-            sender.sendMessage(messages.playerNotOnline.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(messages.errors.offline.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
@@ -52,16 +52,16 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
 
         String playerName = player.getName();
         String targetName = target.getName();
-        String[] parts = messages.acceptTpa.replace(Static.MessageKey.player, playerName)
+        String[] parts = messages.tpa.recieved.replace(Static.MessageKey.player, playerName)
                 .split(Static.MessageKey.accept_btn);
 
-        player.sendMessage(messages.requestSent.replace(Static.MessageKey.player, targetName));
+        player.sendMessage(messages.tpa.sent.replace(Static.MessageKey.player, targetName));
         target.sendMessage(join(
                 noSeparators(),
                 text(parts[0]),
-                text(messages.acceptBtnText)
+                text(messages.tpa.buttons.accept.text)
                         .hoverEvent(showText(
-                                text(messages.acceptBtnHoverText.replace(Static.MessageKey.player, targetName))))
+                                text(messages.tpa.buttons.accept.hover.replace(Static.MessageKey.player, targetName))))
                         .clickEvent(runCommand("/" + Static.Command.Names.TPACCEPT + " " + playerName)),
                 text(parts.length > 1 ? parts[1] : "")));
         target.playSound(target.getLocation(), ENTITY_ARROW_HIT_PLAYER, MASTER, 1.0f, 1.0f);
@@ -83,7 +83,6 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
 
     @Override
     public String usage() {
-        return messages.tpaUsage;
+        return messages.tpa.usage;
     }
-
 }

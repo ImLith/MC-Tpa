@@ -27,19 +27,19 @@ final public class TpacceptCommand extends AbstractCommand<Plugin> {
         Player player = (Player) sender;
 
         if (sender.getName().equalsIgnoreCase(args[0])) {
-            sender.sendMessage(messages.noTpaSelf);
+            sender.sendMessage(messages.errors.self);
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage(messages.playerNotFound.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(messages.errors.notfound.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
         if (!target.isOnline()) {
-            sender.sendMessage(messages.playerNotOnline.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(messages.errors.offline.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
@@ -47,7 +47,7 @@ final public class TpacceptCommand extends AbstractCommand<Plugin> {
         UUID result = TpaStore.fetchRequest(targetUUID);
 
         if (result == null) {
-            sender.sendMessage(messages.requestExpired);
+            sender.sendMessage(messages.errors.expired);
             return true;
         }
 
@@ -55,14 +55,14 @@ final public class TpacceptCommand extends AbstractCommand<Plugin> {
         String playerName = player.getName();
         String targetName = target.getName();
 
-        target.sendMessage(messages.acceptedRequest.replace(Static.MessageKey.player, playerName));
+        target.sendMessage(messages.tpaccept.accepted.replace(Static.MessageKey.player, playerName));
         Boolean teleported = target.teleport(player.getLocation());
 
         if (teleported) {
-            sender.sendMessage(messages.onTeleport.replace(Static.MessageKey.player, targetName));
+            sender.sendMessage(messages.tpaccept.teleported.replace(Static.MessageKey.player, targetName));
         } else {
-            sender.sendMessage(messages.failedTeleport.replace(Static.MessageKey.player, targetName));
-            target.sendMessage(messages.failedTeleportation.replace(Static.MessageKey.player, playerName));
+            sender.sendMessage(messages.errors.tpto.replace(Static.MessageKey.player, targetName));
+            target.sendMessage(messages.errors.tpfrom.replace(Static.MessageKey.player, playerName));
         }
 
         return true;
@@ -82,7 +82,7 @@ final public class TpacceptCommand extends AbstractCommand<Plugin> {
 
     @Override
     public String usage() {
-        return messages.tpacceptUsage;
+        return messages.tpaccept.usage;
     }
 
 }
