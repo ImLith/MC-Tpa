@@ -11,14 +11,18 @@ public class Plugin extends MainPlugin<ConfigManager> {
   public void onEnable() {
     Plugin.plugin = this;
 
+    this.registerCommands();
     new ConfigManager(this);
-    new TpaCommand();
-    new TpacceptCommand();
 
     Static.log.info("Plugin enabled");
   }
 
   public void onDisable() {
     Static.log.info("Plugin disabled");
+  }
+
+  private void registerCommands() {
+    new TpaCommand();
+    new TpacceptCommand();
   }
 }
