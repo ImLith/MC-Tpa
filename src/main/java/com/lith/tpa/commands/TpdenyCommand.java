@@ -13,10 +13,10 @@ import com.lith.tpa.Static;
 import com.lith.tpa.classes.TpaStore;
 import static com.lith.tpa.config.ConfigManager.messages;
 
-final public class TpacceptCommand extends AbstractCommand<Plugin> {
+final public class TpdenyCommand extends AbstractCommand<Plugin> {
     protected final String permission = Static.Command.PermissionKeys.TPA;
 
-    public TpacceptCommand() {
+    public TpdenyCommand() {
         super((Plugin) Plugin.plugin, Static.Command.Names.TPACCEPT, 1);
         Plugin.plugin.getCommand(Static.Command.Names.TPACCEPT).setExecutor(this);
     }
@@ -54,15 +54,8 @@ final public class TpacceptCommand extends AbstractCommand<Plugin> {
         String playerName = player.getName();
         String targetName = target.getName();
 
-        target.sendMessage(messages.tpaccept.accepted.replace(Static.MessageKey.player, playerName));
-        Boolean teleported = target.teleport(player.getLocation());
-
-        if (teleported) {
-            sender.sendMessage(messages.tpaccept.teleported.replace(Static.MessageKey.player, targetName));
-        } else {
-            sender.sendMessage(messages.errors.tpto.replace(Static.MessageKey.player, targetName));
-            target.sendMessage(messages.errors.tpfrom.replace(Static.MessageKey.player, playerName));
-        }
+        sender.sendMessage(messages.tpdeny.notTeleported.replace(Static.MessageKey.player, targetName));
+        target.sendMessage(messages.tpdeny.denied.replace(Static.MessageKey.player, playerName));
 
         return true;
     }

@@ -21,6 +21,8 @@ messages:
 
   tpdeny:
     usage: "Usage: /tpdeny <player>"
+    denied: "%player% has denied your teleportation request"
+    notteleported: "Denied %player% request to teleport"
 
   errors:
     self: "Can't teleport to yourself!"

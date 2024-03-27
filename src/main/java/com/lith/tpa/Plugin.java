@@ -3,6 +3,7 @@ package com.lith.tpa;
 import com.lith.lithcore.abstractClasses.MainPlugin;
 import com.lith.tpa.commands.TpaCommand;
 import com.lith.tpa.commands.TpacceptCommand;
+import com.lith.tpa.commands.TpdenyCommand;
 import com.lith.tpa.config.ConfigManager;
 
 public class Plugin extends MainPlugin<ConfigManager> {
@@ -24,5 +25,6 @@ public class Plugin extends MainPlugin<ConfigManager> {
   private void registerCommands() {
     new TpaCommand();
     new TpacceptCommand();
+    new TpdenyCommand();
   }
 }

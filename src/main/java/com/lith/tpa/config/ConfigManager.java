@@ -54,6 +54,8 @@ public class ConfigManager extends PluginConfigManager {
 
         public class Tpdeny {
             public final String usage = getMessage(ConfigKeys.Messages.Tpdeny.USAGE);
+            public final String denied = getMessage(ConfigKeys.Messages.Tpdeny.DENIED);
+            public final String notTeleported = getMessage(ConfigKeys.Messages.Tpdeny.NOT_TELEPORTED);
         }
 
         public class Errors {

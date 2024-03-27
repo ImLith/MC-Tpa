@@ -36,6 +36,8 @@ public class Static {
 
             public static final class Tpdeny extends AbstractConfigKey {
                 public static final String USAGE = setKey("usage");
+                public static final String DENIED = setKey("usage");
+                public static final String NOT_TELEPORTED = setKey("usage");
             }
 
             public static final class Errors extends AbstractConfigKey {
