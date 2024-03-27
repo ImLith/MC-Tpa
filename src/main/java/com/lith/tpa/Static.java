@@ -2,31 +2,53 @@ package com.lith.tpa;
 
 import java.util.logging.Logger;
 
+import com.lith.lithcore.abstractClasses.AbstractConfigKey;
+
 public class Static {
     public static final String pluginName = "TPA";
     public static final Logger log = Logger.getLogger(Static.pluginName);
 
     final public static class ConfigKeys {
-        public static final class Messages {
-            public static final String SECTION = "messages";
-            public static final String TPA_USAGE = "tpa_usage";
-            public static final String NO_TPA_SELF = "no_tpa_self";
-            public static final String PLAYER_NOT_FOUND = "player_not_found";
-            public static final String PLAYER_NOT_ONLINE = "player_not_online";
-            public static final String REQUEST_SENT = "request_sent";
-            public static final String ACCEPT_TPA = "accept_tpa";
-            public static final String REQUEST_EXPIRED = "request_expired";
-            public static final String TPACCEPT_USAGE = "tpaccept_usage";
-            public static final String ACCEPTED_REQUEST = "accepted_request";
-            public static final String ON_TELEPORT = "on_teleport";
-            public static final String FAILED_TELEPORT = "failed_teleport";
-            public static final String FAILED_TELEPORATION = "failed_teleportation";
-        }
+        public static final class Messages extends AbstractConfigKey {
+            public static final class Tpa extends AbstractConfigKey {
+                public static final String USAGE = setKey("usage");
+                public static final String SENT = setKey("sent");
+                public static final String RECIEVED = setKey("recieved");
+                public static final String PENDING = setKey("pending");
 
-        public static final class AcceptBtn {
-            public static final String SECTION = "accept_btn";
-            public static final String TEXT = "text";
-            public static final String HOVER_TEXT = "hover_text";
+                public static final class Buttons extends AbstractConfigKey {
+                    public static final class Accept extends AbstractConfigKey {
+                        public static final String TEXT = setKey("text");
+                        public static final String HOVER = setKey("hover");
+                    }
+
+                    public static final class Deny extends AbstractConfigKey {
+                        public static final String TEXT = setKey("text");
+                        public static final String HOVER = setKey("hover");
+                    }
+                }
+            }
+
+            public static final class Tpaccept extends AbstractConfigKey {
+                public static final String USAGE = setKey("usage");
+                public static final String ACCEPTED = setKey("accepted");
+                public static final String TELEPORTED = setKey("teleported");
+            }
+
+            public static final class Tpdeny extends AbstractConfigKey {
+                public static final String USAGE = setKey("usage");
+                public static final String DENIED = setKey("denied");
+                public static final String NOT_TELEPORTED = setKey("notteleported");
+            }
+
+            public static final class Errors extends AbstractConfigKey {
+                public static final String SELF = setKey("self");
+                public static final String OFFLINE = setKey("offline");
+                public static final String NOTFOUND = setKey("notfound");
+                public static final String EXPIRED = setKey("expired");
+                public static final String TPTO = setKey("tpto");
+                public static final String TPFROM = setKey("tpfrom");
+            }
         }
     }
 
@@ -34,6 +56,7 @@ public class Static {
         final public static class Names {
             public static final String TPA = "tpa";
             public static final String TPACCEPT = "tpaccept";
+            public static final String TPDENY = "tpdeny";
         }
 
         final public static class PermissionKeys {
@@ -45,5 +68,6 @@ public class Static {
     final public static class MessageKey {
         public static final String player = "%player%";
         public static final String accept_btn = "%accept%";
+        public static final String deny_btn = "%deny%";
     }
 }

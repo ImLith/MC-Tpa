@@ -1,17 +1,34 @@
-messages:
-  tpa_usage: "Usage: /tpa <player>"
-  no_tpa_self: "Can't teleport to yourself!"
-  player_not_found: "Player %player% not found!"
-  player_not_online: "Player %player% is not online!"
-  request_sent: "TPA request sent to %player%"
-  accept_tpa: "%accept% TPA request from %player%"
-  request_expired: "TPA request has expired"
-  tpaccept_usage: "Usage: /tpaccept <player>"
-  accepted_request: "%player% accepted your teleportation request"
-  on_teleport: "Teleported %player% to you"
-  failed_teleport: "Failed to teleport %player% to you!"
-  failed_teleportation: "Failed to teleport you to %player%"
+# Supports colors like &1. Full list here: https://htmlcolorcodes.com/minecraft-color-codes/
+# Supports unicodes. Including custom. Write \\uXXXX and it will parse it
 
-accept_btn:
-  text: "[Accept]"
-  hover_text: "Click to accept TPA from %player%"
+messages:
+  tpa:
+    usage: "Usage: /tpa <player>"
+    sent: "TPA request sent to %player%"
+    recieved: "TPA request from %player%\nClick: %accept%\nClick %deny%"
+    pending: "TPA request to %player% is already pending!"
+    buttons:
+      accept:
+        text: "[Accept]"
+        hover: "Click to accept TPA from %player%"
+      deny:
+        text: "[Deny]"
+        hover: "Click to deny TPA from %player%"
+
+  tpaccept:
+    usage: "Usage: /tpaccept <player>"
+    accepted: "%player% accepted your teleportation request"
+    teleported: "Teleported %player% to you"
+
+  tpdeny:
+    usage: "Usage: /tpdeny <player>"
+    denied: "%player% has denied your teleportation request"
+    notteleported: "Denied %player% request to teleport"
+
+  errors:
+    self: "Can't teleport to yourself!"
+    offline: "Player %player% is not online!"
+    notfound: "Player %player% not found!"
+    expired: "TPA request has expired"
+    tpto: "Failed to teleport %player% to you!"
+    tpfrom: "Failed to teleport you to %player%"
