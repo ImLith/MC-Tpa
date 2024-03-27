@@ -35,16 +35,17 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
     @Override
     public boolean onExecute(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
-
-        if (sender.getName().equalsIgnoreCase(args[0])) {
-            sender.sendMessage(messages.errors.self);
-            return true;
-        }
-
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
             sender.sendMessage(messages.errors.notfound.replace(Static.MessageKey.player, args[0]));
+            return true;
+        }
+
+        String targetName = target.getName();
+
+        if (sender.getName().equalsIgnoreCase(targetName)) {
+            sender.sendMessage(messages.errors.self);
             return true;
         }
 
@@ -53,16 +54,16 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
             return true;
         }
 
-        String targetName = target.getName();
         UUID playerUUID = player.getUniqueId();
-        UUID result = TpaStore.fetchRequest(playerUUID);
+        UUID targetUUID = target.getUniqueId();
+        UUID result = TpaStore.fetchRequest(playerUUID, targetUUID);
 
         if (result != null) {
             player.sendMessage(messages.tpa.pending.replace(Static.MessageKey.player, targetName));
             return true;
         }
 
-        TpaStore.storeRequest(playerUUID, target.getUniqueId());
+        TpaStore.storeRequest(playerUUID, targetUUID);
 
         String playerName = player.getName();
         String targetResponseMessage = messages.tpa.recieved.replace(Static.MessageKey.player, playerName);
