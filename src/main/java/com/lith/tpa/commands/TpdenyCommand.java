@@ -17,8 +17,8 @@ final public class TpdenyCommand extends AbstractCommand<Plugin> {
     protected final String permission = Static.Command.PermissionKeys.TPA;
 
     public TpdenyCommand() {
-        super((Plugin) Plugin.plugin, Static.Command.Names.TPACCEPT, 1);
-        Plugin.plugin.getCommand(Static.Command.Names.TPACCEPT).setExecutor(this);
+        super((Plugin) Plugin.plugin, Static.Command.Names.TPDENY, 1);
+        Plugin.plugin.getCommand(Static.Command.Names.TPDENY).setExecutor(this);
     }
 
     @Override
@@ -74,7 +74,7 @@ final public class TpdenyCommand extends AbstractCommand<Plugin> {
 
     @Override
     public String usage() {
-        return messages.tpaccept.usage;
+        return messages.tpdeny.usage;
     }
 
 }
