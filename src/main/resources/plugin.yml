@@ -25,7 +25,7 @@ commands:
   tpdeny:
     description: Deny player teleportation request
     usage: /<command> <player>
-    permission: tpa.tpadeny
+    permission: tpa.tpdeny
 
 permissions:
   tpa.tpa:
@@ -33,9 +33,9 @@ permissions:
     default: op
 
   tpa.tpaccept:
-    description: Use the /tpa command
+    description: Use the /tpaccept command
     default: op
 
   tpa.tpdeny:
-    description: Use the /tpa command
+    description: Use the /tpdeny command
     default: op
