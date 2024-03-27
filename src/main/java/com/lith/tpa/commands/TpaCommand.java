@@ -2,6 +2,7 @@ package com.lith.tpa.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.bukkit.Bukkit;
@@ -52,7 +53,16 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
             return true;
         }
 
-        TpaStore.storeRequest(player.getUniqueId(), target.getUniqueId());
+        String targetName = target.getName();
+        UUID playerUUID = player.getUniqueId();
+        UUID result = TpaStore.fetchRequest(playerUUID);
+
+        if (result != null) {
+            player.sendMessage(messages.tpa.pending.replace(Static.MessageKey.player, targetName));
+            return true;
+        }
+
+        TpaStore.storeRequest(playerUUID, target.getUniqueId());
 
         String playerName = player.getName();
         String targetResponseMessage = messages.tpa.recieved.replace(Static.MessageKey.player, playerName);
@@ -84,7 +94,7 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
 
         targetResponse.add(text(targetResponseMessage.substring(previousEnd)));
 
-        player.sendMessage(messages.tpa.sent.replace(Static.MessageKey.player, target.getName()));
+        player.sendMessage(messages.tpa.sent.replace(Static.MessageKey.player, targetName));
         target.sendMessage(join(noSeparators(), targetResponse));
         target.playSound(target.getLocation(), ENTITY_ARROW_HIT_PLAYER, MASTER, 1.0f, 1.0f);
 

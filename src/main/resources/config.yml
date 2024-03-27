@@ -6,6 +6,7 @@ messages:
     usage: "Usage: /tpa <player>"
     sent: "TPA request sent to %player%"
     recieved: "TPA request from %player%\nClick: %accept%\nClick %deny%"
+    pending: "TPA request to %player% is already pending!"
     buttons:
       accept:
         text: "[Accept]"

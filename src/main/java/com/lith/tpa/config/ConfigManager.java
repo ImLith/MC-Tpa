@@ -25,6 +25,7 @@ public class ConfigManager extends PluginConfigManager {
             public final String usage = getMessage(ConfigKeys.Messages.Tpa.USAGE);
             public final String sent = getMessage(ConfigKeys.Messages.Tpa.SENT);
             public final String recieved = getMessage(ConfigKeys.Messages.Tpa.RECIEVED);
+            public final String pending = getMessage(ConfigKeys.Messages.Tpa.PENDING);
 
             public class Buttons {
                 public Accept accept = new Accept();
