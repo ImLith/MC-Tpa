@@ -53,6 +53,7 @@ public class Static {
         final public static class Names {
             public static final String TPA = "tpa";
             public static final String TPACCEPT = "tpaccept";
+            public static final String TPDENY = "tpdeny";
         }
 
         final public static class PermissionKeys {
