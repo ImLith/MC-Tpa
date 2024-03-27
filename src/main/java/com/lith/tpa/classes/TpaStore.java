@@ -8,16 +8,20 @@ public class TpaStore {
     public static final String REQUEST_PREFIX = PREFIX + "request.";
 
     public static void storeRequest(UUID sender, UUID target) {
-        RedisDb.init().set(REQUEST_PREFIX + sender, target.toString(), 120L);
+        RedisDb.init().set(genKey(sender, target), target.toString(), 120L);
     }
 
-    public static UUID fetchRequest(UUID sender) {
-        String result = RedisDb.init().get(REQUEST_PREFIX + sender);
+    public static UUID fetchRequest(UUID sender, UUID target) {
+        String result = RedisDb.init().get(genKey(sender, target));
 
         return result == null ? null : UUID.fromString(result);
     }
 
-    public static void deleteRequest(UUID tagret) {
-        RedisDb.init().del(REQUEST_PREFIX + tagret);
+    public static void deleteRequest(UUID sender, UUID target) {
+        RedisDb.init().del(genKey(sender, target));
+    }
+
+    private static String genKey(UUID sender, UUID target) {
+        return REQUEST_PREFIX + sender + "." + target;
     }
 }
