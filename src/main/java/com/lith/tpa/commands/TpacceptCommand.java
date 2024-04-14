@@ -14,8 +14,8 @@ import com.lith.tpa.classes.TpaStore;
 
 final public class TpacceptCommand extends AbstractCommand<Plugin> {
     public TpacceptCommand(Plugin plugin) {
-        super((Plugin) plugin, Static.Command.Names.TPACCEPT, 1, Static.Command.PermissionKeys.TPA);
-        plugin.getCommand(Static.Command.Names.TPACCEPT).setExecutor(this);
+        super((Plugin) plugin, Static.Commands.Name.TPACCEPT, 1, Static.Commands.Permission.TPA);
+        plugin.getCommand(Static.Commands.Name.TPACCEPT).setExecutor(this);
     }
 
     @Override

@@ -47,16 +47,20 @@ public class Static {
         }
     }
 
-    final public static class Command {
-        final public static class Names {
+    final public static class Commands {
+        final public static class Name {
             public static final String TPA = "tpa";
             public static final String TPACCEPT = "tpaccept";
             public static final String TPDENY = "tpdeny";
+            public static final String RELOAD = "tpreload";
         }
 
-        final public static class PermissionKeys {
-            public static final String PREFIX = "tpa";
-            public static final String TPA = PermissionKeys.PREFIX + "tpa";
+        final public static class Permission {
+            public static final String PREFIX = "tpa.";
+            public static final String TPA = PREFIX + "tpa";
+            public static final String TPACCEPT = PREFIX + "tpaccept";
+            public static final String TPDENY = PREFIX + "tpdeny";
+            public static final String RELOAD = PREFIX + "reload";
         }
     }
 

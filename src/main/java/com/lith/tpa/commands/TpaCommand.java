@@ -25,8 +25,8 @@ import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
 
 final public class TpaCommand extends AbstractCommand<Plugin> {
     public TpaCommand(Plugin plugin) {
-        super((Plugin) plugin, Static.Command.Names.TPA, 1, Static.Command.PermissionKeys.TPA);
-        plugin.getCommand(Static.Command.Names.TPA).setExecutor(this);
+        super((Plugin) plugin, Static.Commands.Name.TPA, 1, Static.Commands.Permission.TPA);
+        plugin.getCommand(Static.Commands.Name.TPA).setExecutor(this);
     }
 
     @Override
@@ -79,13 +79,13 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
                         .hoverEvent(showText(
                                 text(plugin.configs.messages.tpa.buttons.accept.hover
                                         .replace(Static.MessageKey.player, playerName))))
-                        .clickEvent(runCommand("/" + Static.Command.Names.TPACCEPT + " " + playerName)));
+                        .clickEvent(runCommand("/" + Static.Commands.Name.TPACCEPT + " " + playerName)));
             else if (match.equals(Static.MessageKey.deny_btn))
                 targetResponse.add(text(plugin.configs.messages.tpa.buttons.deny.text)
                         .hoverEvent(showText(
                                 text(plugin.configs.messages.tpa.buttons.deny.hover
                                         .replace(Static.MessageKey.player, playerName))))
-                        .clickEvent(runCommand("/" + Static.Command.Names.TPDENY + " " + playerName)));
+                        .clickEvent(runCommand("/" + Static.Commands.Name.TPDENY + " " + playerName)));
 
             previousEnd = matcher.end();
         }

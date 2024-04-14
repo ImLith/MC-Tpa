@@ -14,8 +14,8 @@ import com.lith.tpa.classes.TpaStore;
 
 final public class TpdenyCommand extends AbstractCommand<Plugin> {
     public TpdenyCommand(Plugin plugin) {
-        super((Plugin) plugin, Static.Command.Names.TPDENY, 1, Static.Command.PermissionKeys.TPA);
-        plugin.getCommand(Static.Command.Names.TPDENY).setExecutor(this);
+        super((Plugin) plugin, Static.Commands.Name.TPDENY, 1, Static.Commands.Permission.TPA);
+        plugin.getCommand(Static.Commands.Name.TPDENY).setExecutor(this);
     }
 
     @Override

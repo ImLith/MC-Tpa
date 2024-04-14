@@ -27,6 +27,11 @@ commands:
     usage: /<command> <player>
     permission: tpa.tpdeny
 
+  tpreload:
+    description: Reload configs
+    usage: /<command>
+    permission: tpa.reload
+
 permissions:
   tpa.tpa:
     description: Use the /tpa command
@@ -38,4 +43,8 @@ permissions:
 
   tpa.tpdeny:
     description: Use the /tpdeny command
+    default: op
+
+  tpa.reload:
+    description: Reload configs
     default: op
