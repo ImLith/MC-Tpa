@@ -15,7 +15,6 @@ import com.lith.tpa.Plugin;
 import com.lith.tpa.Static;
 import com.lith.tpa.classes.TpaStore;
 import net.kyori.adventure.text.TextComponent;
-import static com.lith.tpa.config.ConfigManager.messages;
 import static net.kyori.adventure.text.Component.join;
 import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.event.HoverEvent.showText;
@@ -25,11 +24,9 @@ import static org.bukkit.Sound.ENTITY_ARROW_HIT_PLAYER;
 import static net.kyori.adventure.text.JoinConfiguration.noSeparators;
 
 final public class TpaCommand extends AbstractCommand<Plugin> {
-    protected final String permission = Static.Command.PermissionKeys.TPA;
-
-    public TpaCommand() {
-        super((Plugin) Plugin.plugin, Static.Command.Names.TPA, 1);
-        Plugin.plugin.getCommand(Static.Command.Names.TPA).setExecutor(this);
+    public TpaCommand(Plugin plugin) {
+        super((Plugin) plugin, Static.Commands.Name.TPA, 1, Static.Commands.Permission.TPA);
+        plugin.getCommand(Static.Commands.Name.TPA).setExecutor(this);
     }
 
     @Override
@@ -38,19 +35,18 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage(messages.errors.notfound.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(plugin.configs.messages.errors.notfound.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
         String targetName = target.getName();
-
         if (sender.getName().equalsIgnoreCase(targetName)) {
-            sender.sendMessage(messages.errors.self);
+            sender.sendMessage(plugin.configs.messages.errors.self);
             return true;
         }
 
         if (!target.isOnline()) {
-            sender.sendMessage(messages.errors.offline.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(plugin.configs.messages.errors.offline.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
@@ -59,14 +55,15 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
         UUID result = TpaStore.fetchRequest(playerUUID, targetUUID);
 
         if (result != null) {
-            player.sendMessage(messages.tpa.pending.replace(Static.MessageKey.player, targetName));
+            player.sendMessage(plugin.configs.messages.tpa.pending.replace(Static.MessageKey.player, targetName));
             return true;
         }
 
         TpaStore.storeRequest(playerUUID, targetUUID);
 
         String playerName = player.getName();
-        String targetResponseMessage = messages.tpa.recieved.replace(Static.MessageKey.player, playerName);
+        String targetResponseMessage = plugin.configs.messages.tpa.recieved.replace(Static.MessageKey.player,
+                playerName);
         Matcher matcher = Pattern.compile("(" + Static.MessageKey.accept_btn + "|" + Static.MessageKey.deny_btn + ")")
                 .matcher(targetResponseMessage);
         ArrayList<TextComponent> targetResponse = new ArrayList<>();
@@ -78,24 +75,24 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
             String match = matcher.group();
 
             if (match.equals(Static.MessageKey.accept_btn))
-                targetResponse.add(text(messages.tpa.buttons.accept.text)
+                targetResponse.add(text(plugin.configs.messages.tpa.buttons.accept.text)
                         .hoverEvent(showText(
-                                text(messages.tpa.buttons.accept.hover
+                                text(plugin.configs.messages.tpa.buttons.accept.hover
                                         .replace(Static.MessageKey.player, playerName))))
-                        .clickEvent(runCommand("/" + Static.Command.Names.TPACCEPT + " " + playerName)));
+                        .clickEvent(runCommand("/" + Static.Commands.Name.TPACCEPT + " " + playerName)));
             else if (match.equals(Static.MessageKey.deny_btn))
-                targetResponse.add(text(messages.tpa.buttons.deny.text)
+                targetResponse.add(text(plugin.configs.messages.tpa.buttons.deny.text)
                         .hoverEvent(showText(
-                                text(messages.tpa.buttons.deny.hover
+                                text(plugin.configs.messages.tpa.buttons.deny.hover
                                         .replace(Static.MessageKey.player, playerName))))
-                        .clickEvent(runCommand("/" + Static.Command.Names.TPDENY + " " + playerName)));
+                        .clickEvent(runCommand("/" + Static.Commands.Name.TPDENY + " " + playerName)));
 
             previousEnd = matcher.end();
         }
 
         targetResponse.add(text(targetResponseMessage.substring(previousEnd)));
 
-        player.sendMessage(messages.tpa.sent.replace(Static.MessageKey.player, targetName));
+        player.sendMessage(plugin.configs.messages.tpa.sent.replace(Static.MessageKey.player, targetName));
         target.sendMessage(join(noSeparators(), targetResponse));
         target.playSound(target.getLocation(), ENTITY_ARROW_HIT_PLAYER, MASTER, 1.0f, 1.0f);
 
@@ -116,6 +113,6 @@ final public class TpaCommand extends AbstractCommand<Plugin> {
 
     @Override
     public String usage() {
-        return messages.tpa.usage;
+        return plugin.configs.messages.tpa.usage;
     }
 }

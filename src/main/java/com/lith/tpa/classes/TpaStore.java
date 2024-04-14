@@ -2,11 +2,9 @@ package com.lith.tpa.classes;
 
 import java.util.UUID;
 import com.lith.redis.classes.RedisDb;
+import static com.lith.tpa.Static.StorageKeys;
 
 public class TpaStore {
-    public static final String PREFIX = "tpa.";
-    public static final String REQUEST_PREFIX = PREFIX + "request.";
-
     public static void storeRequest(UUID sender, UUID target) {
         RedisDb.init().set(genKey(sender, target), target.toString(), 120L);
     }
@@ -22,6 +20,6 @@ public class TpaStore {
     }
 
     private static String genKey(UUID sender, UUID target) {
-        return REQUEST_PREFIX + sender + "." + target;
+        return StorageKeys.Tpa.REQUEST_PREFIX + sender + "." + target;
     }
 }

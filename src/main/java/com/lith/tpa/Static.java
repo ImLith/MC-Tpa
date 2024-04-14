@@ -1,13 +1,8 @@
 package com.lith.tpa;
 
-import java.util.logging.Logger;
-
 import com.lith.lithcore.abstractClasses.AbstractConfigKey;
 
 public class Static {
-    public static final String pluginName = "TPA";
-    public static final Logger log = Logger.getLogger(Static.pluginName);
-
     final public static class ConfigKeys {
         public static final class Messages extends AbstractConfigKey {
             public static final class Tpa extends AbstractConfigKey {
@@ -52,16 +47,20 @@ public class Static {
         }
     }
 
-    final public static class Command {
-        final public static class Names {
+    final public static class Commands {
+        final public static class Name {
             public static final String TPA = "tpa";
             public static final String TPACCEPT = "tpaccept";
             public static final String TPDENY = "tpdeny";
+            public static final String RELOAD = "tpreload";
         }
 
-        final public static class PermissionKeys {
-            public static final String PREFIX = "tpa";
-            public static final String TPA = PermissionKeys.PREFIX + "tpa";
+        final public static class Permission {
+            public static final String PREFIX = "tpa.";
+            public static final String TPA = PREFIX + "tpa";
+            public static final String TPACCEPT = PREFIX + "tpaccept";
+            public static final String TPDENY = PREFIX + "tpdeny";
+            public static final String RELOAD = PREFIX + "reload";
         }
     }
 
@@ -69,5 +68,12 @@ public class Static {
         public static final String player = "%player%";
         public static final String accept_btn = "%accept%";
         public static final String deny_btn = "%deny%";
+    }
+
+    final public static class StorageKeys {
+        final public static class Tpa {
+            public static final String PREFIX = "tpa.";
+            public static final String REQUEST_PREFIX = PREFIX + "request.";
+        }
     }
 }

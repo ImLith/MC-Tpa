@@ -11,14 +11,11 @@ import com.lith.lithcore.utils.PlayerUtil;
 import com.lith.tpa.Plugin;
 import com.lith.tpa.Static;
 import com.lith.tpa.classes.TpaStore;
-import static com.lith.tpa.config.ConfigManager.messages;
 
 final public class TpdenyCommand extends AbstractCommand<Plugin> {
-    protected final String permission = Static.Command.PermissionKeys.TPA;
-
-    public TpdenyCommand() {
-        super((Plugin) Plugin.plugin, Static.Command.Names.TPDENY, 1);
-        Plugin.plugin.getCommand(Static.Command.Names.TPDENY).setExecutor(this);
+    public TpdenyCommand(Plugin plugin) {
+        super((Plugin) plugin, Static.Commands.Name.TPDENY, 1, Static.Commands.Permission.TPA);
+        plugin.getCommand(Static.Commands.Name.TPDENY).setExecutor(this);
     }
 
     @Override
@@ -27,19 +24,19 @@ final public class TpdenyCommand extends AbstractCommand<Plugin> {
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage(messages.errors.notfound.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(plugin.configs.messages.errors.notfound.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
         String targetName = target.getName();
 
         if (sender.getName().equalsIgnoreCase(targetName)) {
-            sender.sendMessage(messages.errors.self);
+            sender.sendMessage(plugin.configs.messages.errors.self);
             return true;
         }
 
         if (!target.isOnline()) {
-            sender.sendMessage(messages.errors.offline.replace(Static.MessageKey.player, args[0]));
+            sender.sendMessage(plugin.configs.messages.errors.offline.replace(Static.MessageKey.player, args[0]));
             return true;
         }
 
@@ -48,15 +45,15 @@ final public class TpdenyCommand extends AbstractCommand<Plugin> {
         UUID result = TpaStore.fetchRequest(targetUUID, playerUUID);
 
         if (result == null) {
-            sender.sendMessage(messages.errors.expired);
+            sender.sendMessage(plugin.configs.messages.errors.expired);
             return true;
         }
 
         TpaStore.deleteRequest(targetUUID, playerUUID);
         String playerName = player.getName();
 
-        sender.sendMessage(messages.tpdeny.notTeleported.replace(Static.MessageKey.player, targetName));
-        target.sendMessage(messages.tpdeny.denied.replace(Static.MessageKey.player, playerName));
+        sender.sendMessage(plugin.configs.messages.tpdeny.notTeleported.replace(Static.MessageKey.player, targetName));
+        target.sendMessage(plugin.configs.messages.tpdeny.denied.replace(Static.MessageKey.player, playerName));
 
         return true;
     }
@@ -75,7 +72,6 @@ final public class TpdenyCommand extends AbstractCommand<Plugin> {
 
     @Override
     public String usage() {
-        return messages.tpdeny.usage;
+        return plugin.configs.messages.tpdeny.usage;
     }
-
 }

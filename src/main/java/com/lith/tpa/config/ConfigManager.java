@@ -1,15 +1,19 @@
 package com.lith.tpa.config;
 
-import com.lith.lithcore.abstractClasses.MainPlugin;
-import com.lith.lithcore.abstractClasses.PluginConfigManager;
+import com.lith.lithcore.abstractClasses.AbstractConfigManager;
+import com.lith.tpa.Plugin;
 import com.lith.tpa.Static.ConfigKeys;
 
-public class ConfigManager extends PluginConfigManager {
-    public static ConfigMessages messages;
+public class ConfigManager extends AbstractConfigManager<Plugin, ConfigManager> {
+    public ConfigMessages messages;
 
-    public ConfigManager(final MainPlugin<ConfigManager> plugin) {
+    public ConfigManager(final Plugin plugin) {
         super(plugin);
+    }
 
+    @Override
+    public void load() {
+        super.load();
         messages = new ConfigMessages();
     }
 
