@@ -1,13 +1,8 @@
 package com.lith.tpa;
 
-import java.util.logging.Logger;
-
 import com.lith.lithcore.abstractClasses.AbstractConfigKey;
 
 public class Static {
-    public static final String pluginName = "TPA";
-    public static final Logger log = Logger.getLogger(Static.pluginName);
-
     final public static class ConfigKeys {
         public static final class Messages extends AbstractConfigKey {
             public static final class Tpa extends AbstractConfigKey {
@@ -69,5 +64,12 @@ public class Static {
         public static final String player = "%player%";
         public static final String accept_btn = "%accept%";
         public static final String deny_btn = "%deny%";
+    }
+
+    final public static class StorageKeys {
+        final public static class Tpa {
+            public static final String PREFIX = "tpa.";
+            public static final String REQUEST_PREFIX = PREFIX + "request.";
+        }
     }
 }
